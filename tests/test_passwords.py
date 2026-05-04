@@ -5,16 +5,13 @@ class TestPassword(unittest.TestCase):
 
     def test_length(self):
         service = PasswordService()
-        pwd = service.generate_password(10)
-        self.assertEqual(len(pwd), 10)
+        pwd = service.generate(5)
+        self.assertEqual(len(pwd), 5)
 
     def test_not_empty(self):
         service = PasswordService()
-        pwd = service.generate_password()
-        self.assertTrue(len(pwd) > 0)
+        pwd = service.generate(5)
+        self.assertTrue(pwd != "")
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
