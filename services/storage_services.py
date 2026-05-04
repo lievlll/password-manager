@@ -2,16 +2,33 @@ import json
 from models.password_record import PasswordRecord
 
 class StorageService:
-    FILE_PATH = "data/passwords.json"
 
     def load(self):
         try:
-            with open(self.FILE_PATH, "r") as f:
+            with open("data/passwords.json", "r") as f:
                 data = json.load(f)
-                return [PasswordRecord(**item) for item in data]
+                records = []
+                for item in data:
+                    record = PasswordRecord(
+                        item["service"],
+                        item["username"],
+                        item["password"],
+                        item["created_at"]
+                    )
+                    records.append(record)
+                return records
         except:
             return []
 
     def save(self, records):
-        with open(self.FILE_PATH, "w") as f:
-            json.dump([r.__dict__ for r in records], f, indent=4)
+        data = []
+        for r in records:
+            data.append({
+                "service": r.service,
+                "username": r.username,
+                "password": r.password,
+                "created_at": r.created_at
+            })
+
+        with open("data/passwords.json", "w") as f:
+            json.dump(data, f, indent=4)
