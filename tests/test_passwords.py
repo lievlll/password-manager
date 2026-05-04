@@ -1,4 +1,3 @@
-
 import unittest
 from services.password_service import PasswordService
 
@@ -16,7 +15,6 @@ class TestPassword(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
 
 
 
