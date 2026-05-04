@@ -1,5 +1,6 @@
 class ValidationService:
 
-    @staticmethod
-    def not_empty(value):
-        return isinstance(value, str) and len(value.strip()) > 0
+    def not_empty(self, text):
+        if text.strip() == "":
+            return False
+        return True
